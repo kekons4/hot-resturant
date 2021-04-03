@@ -9,3 +9,4 @@ const reservationDetails = [
 
 const waitlist = [];
 
+module.exports = (reservationDetails, waitlist);
