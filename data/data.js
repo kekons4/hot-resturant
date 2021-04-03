@@ -18,3 +18,4 @@ const waitlist = [
     }
 ];
 
+module.exports = (reservationDetails, waitlist);
