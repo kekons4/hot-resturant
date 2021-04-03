@@ -22,9 +22,9 @@
 			<br>
 
 			<div class="text-center">
-				<a href="/tables"><button type="button" class="btn btn-lg btn-primary" id='table-btn'><span
+				<a href="/waitlist"><button type="button" class="btn btn-lg btn-primary" id='table-btn'><span
 							class="glyphicon glyphicon-list-alt"></span> View Tables</button></a>
-				<a href="/reserve"><button type="button" class="btn btn-lg btn-danger" id='reserve-btn'><span
+				<a href="/reservations"><button type="button" class="btn btn-lg btn-danger" id='reserve-btn'><span
 							class="glyphicon glyphicon-credit-card"></span> Make Reservation</button></a>
 			</div>
 
@@ -32,7 +32,8 @@
 
 		<footer class="footer">
 			<div class="container">
-				<p><a href="/api/tables" id='tables'>API Table Link</a> | <a href="/api/waitlist" id='wait-list'>API
+				<p><a href="/api/reservations" id='tables'>API Table Link</a> | <a href="/api/waitlist"
+						id='wait-list'>API
 						Wait List</a></p>
 			</div>
 		</footer>
@@ -41,16 +42,48 @@
 <script type='text/javascript'>
 	const tableBtn = $('#table-btn')
 	const reserveBtn = $('#reserve-btn')
-	const tableAPI = $('#tables')
+	const reserveAPI = $('#tables')
 	const waitlistAPI = $('#wait-list')
 
 	tableBtn.addEventListener('click', (event) => {
-		event.preventDefault;
-		$.get('tables.html', function (data) {
-			$(".result").html(data);
-			alert("Load was performed.");
-		});
-	})
+		location.replace('./waitlist');
+	});
+
+	reserveBtn.addEventListener('click', (event) => {
+		location.replace('./reservations');
+	});
+
+	reserveAPI('click', (event) => {
+		fetch(`/api/reservations`, {
+			Method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log('hello', data)
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	});
+
+	waitlistAPI('click', (event) => {
+		fetch(`/api/waitlist`, {
+			Method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log('hello', data)
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	});
 </script>
 
 </html>
