@@ -32,9 +32,9 @@ router.post('/api/waitlist', (req, res) => {
     res.end("Sucessfully added to waitlist");
 })
 
-// Code "adapted" from FinalStarWarsApp
+// Code "adapted" from FinalStarWarsrouter
 if (reservation.length < 5) {
-    app.post('/api/reservations', (req, res) => {
+    router.post('/api/reservations', (req, res) => {
         reservation = req.body;
     
         reservation.customerName = reservation.name.replace(/\s+/g, '').toLowerCase();
@@ -44,7 +44,7 @@ if (reservation.length < 5) {
         res.json(reservation);
     });
 } else {
-    app.post('/api/waitlist', (req, res) => {
+    router.post('/api/waitlist', (req, res) => {
         waitlist = req.body;
 
         waitlist.customerName = waitlist.name.replace(/\s+/g, '').toLowerCase();
