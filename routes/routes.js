@@ -22,9 +22,9 @@ router.get('/api/reservations', (req, res) => {
 })
 
 router.post('/api/waitlist', (req, res) => {
-    const newReservation = req.body;
-    // console.log(newReservation);
-    waitlist.push(newReservation);
+    reservation = req.body;
+    // console.log(reservation);
+    waitlist.push(reservation);
     console.log(waitlist);
     fs.writeFile("./data/waitlist.json", JSON.stringify(waitlist), err => {
         err ? console.log(err) : console.log("Successfully written to waitlist.json");
@@ -32,4 +32,26 @@ router.post('/api/waitlist', (req, res) => {
     res.end("Sucessfully added to waitlist");
 })
 
+// Code "adapted" from FinalStarWarsrouter
+if (reservation.length < 5) {
+    router.post('/api/reservations', (req, res) => {
+        reservation = req.body;
+    
+        reservation.customerName = reservation.name.replace(/\s+/g, '').toLowerCase();
+        console.log(reservation);
+    
+        reservation.push(newReservation);
+        res.json(reservation);
+    });
+} else {
+    router.post('/api/waitlist', (req, res) => {
+        waitlist = req.body;
+
+        waitlist.customerName = waitlist.name.replace(/\s+/g, '').toLowerCase();
+        console.log(waitlist);
+
+        waitlist.push(newWaitlist);
+        res.json(waitlist);
+    });
+};
 module.exports = router;
