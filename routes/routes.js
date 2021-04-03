@@ -18,7 +18,11 @@ router.get('/reservations', (req, res) => {
 });
 
 router.get('/api/reservations', (req, res) => {
-    console.log(data2[1]);
+    res.end(JSON.stringify(reservation));
+});
+
+router.get('/api/waitlist', (req, res) => {
+    res.end(JSON.stringify(waitlist));
 });
 
 router.post('/api/waitlist', (req, res) => {
@@ -35,22 +39,28 @@ router.post('/api/waitlist', (req, res) => {
 // Code "adapted" from FinalStarWarsrouter
 if (reservation.length < 5) {
     router.post('/api/reservations', (req, res) => {
-        reservation = req.body;
+        reservation.push(req.body);
     
-        reservation.customerName = reservation.name.replace(/\s+/g, '').toLowerCase();
-        console.log(reservation);
+        // reservation.customerName = reservation.name.replace(/\s+/g, '').toLowerCase();
+        // console.log(reservation);
     
-        reservation.push(newReservation);
+        // reservation.push(newReservation);
+        fs.writeFile("./data/reservation.json", JSON.stringify(reservation), err => {
+            err ? console.log(err) : console.log("Successfully written to reservation.json");
+        });
         res.json(reservation);
     });
 } else {
     router.post('/api/waitlist', (req, res) => {
-        waitlist = req.body;
+        waitlist.push(JSON.stringify(req.body));
 
-        waitlist.customerName = waitlist.name.replace(/\s+/g, '').toLowerCase();
-        console.log(waitlist);
+        // waitlist.customerName = waitlist.name.replace(/\s+/g, '').toLowerCase();
+        // console.log(waitlist);
 
-        waitlist.push(newWaitlist);
+        // waitlist.push(newWaitlist);
+        fs.writeFile("./data/waitlist.json", JSON.stringify(waitlist), err => {
+            err ? console.log(err) : console.log("Successfully written to waitlist.json");
+        });
         res.json(waitlist);
     });
 };
