@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const router = require('express').Router();
+const router = require('./routes/routes');
 
 
 // Assigning express() to a variable to streamline code
@@ -10,6 +10,8 @@ const port = process.env.port || 6101;
 // Data parsing/handling
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use('/', router);
 
 app.listen(port, () => console.log(`App listening on PORT ${port}`));
 
