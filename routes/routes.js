@@ -25,43 +25,32 @@ router.get('/api/waitlist', (req, res) => {
     res.end(JSON.stringify(waitlist));
 })
 
-router.post('/api/waitlist', (req, res) => {
-    reservation = req.body;
-    // console.log(reservation);
-    waitlist.push(reservation);
-    console.log(waitlist);
-    fs.writeFile("./data/waitlist.json", JSON.stringify(waitlist), err => {
-        err ? console.log(err) : console.log("Successfully written to waitlist.json");
-    });
-    res.end("Sucessfully added to waitlist");
-})
+// router.post('/api/waitlist', (req, res) => {
+//     reservation = req.body;
+//     // console.log(reservation);
+//     waitlist.push(reservation);
+//     console.log(waitlist);
+//     fs.writeFile("./data/waitlist.json", JSON.stringify(waitlist), err => {
+//         err ? console.log(err) : console.log("Successfully written to waitlist.json");
+//     });
+//     res.end("Sucessfully added to waitlist");
+// })
 
 // Code "adapted" from FinalStarWarsrouter
-if (reservation.length < 5) {
-    router.post('/api/reservations', (req, res) => {
+router.post('/api/reservations', (req, res) => {
+
+   if(reservation.length < 5){
         reservation.push(req.body);
-    
-        // reservation.customerName = reservation.name.replace(/\s+/g, '').toLowerCase();
-        // console.log(reservation);
-    
-        // reservation.push(newReservation);
         fs.writeFile("./data/reservation.json", JSON.stringify(reservation), err => {
             err ? console.log(err) : console.log("Successfully written to reservation.json");
         });
         res.json(reservation);
-    });
-} else {
-    router.post('/api/waitlist', (req, res) => {
-        waitlist.push(JSON.stringify(req.body));
-
-        // waitlist.customerName = waitlist.name.replace(/\s+/g, '').toLowerCase();
-        // console.log(waitlist);
-
-        // waitlist.push(newWaitlist);
+   } else {
+       waitlist.push(req.body);
         fs.writeFile("./data/waitlist.json", JSON.stringify(waitlist), err => {
             err ? console.log(err) : console.log("Successfully written to waitlist.json");
         });
         res.json(waitlist);
-    });
-};
+   }
+});
 module.exports = router;
