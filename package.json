@@ -1,0 +1,23 @@
+{
+  "name": "hot-resturant",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kekons4/hot-resturant.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kekons4/hot-resturant/issues"
+  },
+  "homepage": "https://github.com/kekons4/hot-resturant#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
