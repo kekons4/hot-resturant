@@ -33,18 +33,8 @@ router.post('/api/waitlist', (req, res) => {
 })
 
 // Code "adapted" from FinalStarWarsApp
-app.post('/api/reservations', (req, res) => {
-    if (reservation.length > 4) {
-        app.post('/api/reservations', (req, res) => {
-            reservation = req.body;
-          
-            reservation.customerName = reservation.name.replace(/\s+/g, '').toLowerCase();
-            console.log(reservation);
-          
-            reservation.push(newReservation);
-            res.json(reservation);
-        });
-    } else {
+if (reservation.length < 5) {
+    app.post('/api/reservations', (req, res) => {
         reservation = req.body;
     
         reservation.customerName = reservation.name.replace(/\s+/g, '').toLowerCase();
@@ -52,7 +42,16 @@ app.post('/api/reservations', (req, res) => {
     
         reservation.push(newReservation);
         res.json(reservation);
-        };
-});
+    });
+} else {
+    app.post('/api/waitlist', (req, res) => {
+        waitlist = req.body;
 
+        waitlist.customerName = waitlist.name.replace(/\s+/g, '').toLowerCase();
+        console.log(waitlist);
+
+        waitlist.push(newWaitlist);
+        res.json(waitlist);
+    });
+};
 module.exports = router;
