@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const path = require('path');
-const data = require('../data/data');
+// const data = require('../data/data');
+const data = require('../data/data.json');
 
 router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, "../public/home.html"));
@@ -15,7 +16,7 @@ router.get('/reservations', (req, res) => {
 })
 
 router.get('/api/reservations', (req, res) => {
-
+    console.log(data2[1]);
 })
 
 router.post('/api/waitlist', (req, res) => {
